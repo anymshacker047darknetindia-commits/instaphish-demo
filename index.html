@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verified Subscription Demo</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  background: #fafafa;
+  font-family: Arial, sans-serif;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+.card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 28px;
+  width: min(90%, 390px);
+  text-align: center;
+}
+.logo { font-size: 27px; font-weight: bold; }
+.tick { color: #168bea; }
+p { color: #777; line-height: 1.5; font-size: 14px; }
+.plan {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 12px 0;
+  text-align: left;
+}
+.price { font-size: 22px; font-weight: bold; }
+input {
+  width: 100%;
+  padding: 14px;
+  margin: 7px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  border: 0;
+  border-radius: 8px;
+  background: #168bea;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+#message { margin-top: 15px; }
+.note { font-size: 11px; }
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="logo">Instagram <span class="tick">✓</span></div>
+  <h2>Verified Subscription Demo</h2>
+
+  <p>
+    Independent educational demo.
+    This is not an official Instagram service.
+  </p>
+
+  <div class="plan">
+    <b>Monthly Demo Plan</b>
+    <div class="price">₹99 / month</div>
+  </div>
+
+  <div class="plan">
+    <b>Yearly Demo Plan</b>
+    <div class="price">₹999 / year</div>
+  </div>
+
+  <h3>Demo Login</h3>
+
+  <form id="loginForm">
+    <input id="username"
+      placeholder="Demo username"
+      autocomplete="off" required>
+
+    <input id="demoCode"
+      placeholder="Demo access code"
+      type="password" required>
+
+    <button type="submit">Try Demo Login</button>
+  </form>
+
+  <p id="message"></p>
+
+  <p class="note">
+    Demo credentials only. Do not enter real Instagram credentials.
+  </p>
+</main>
+
+<script>
+const form = document.getElementById("loginForm");
+const message = document.getElementById("message");
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  message.textContent = "Checking demo...";
+
+  try {
+    const response = await fetch("/demo-login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: document.getElementById("username").value,
+        demo_code: document.getElementById("demoCode").value
+      })
+    });
+
+    const result = await response.json();
+
+    message.textContent = result.message;
+    message.style.color = result.success ? "green" : "red";
+
+    document.getElementById("demoCode").value = "";
+
+  } catch (error) {
+    message.textContent = "Unable to connect to demo server.";
+  }
+});
+</script>
+</body>
+</html>
